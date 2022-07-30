@@ -7,7 +7,7 @@ interface Todo {
 
 type Todos = Todo[];
 
-const initialState: Todos = [
+export const initialState: Todos = [
   { value: "one" },
   { value: "two" },
   { value: "three" },
@@ -25,13 +25,13 @@ const todoSlice = createSlice({
 
 const { addTodo, removeTodo } = todoSlice.actions;
 
-const store = configureStore({
+export const store = configureStore({
   reducer: todoSlice.reducer,
 });
 
 type RootState = ReturnType<typeof store.getState>;
 
-function App() {
+export function App() {
   const todos = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
@@ -60,12 +60,10 @@ function App() {
   );
 }
 
-function AppWithProvider() {
+export function ReduxWay() {
   return (
     <Provider store={store}>
       <App />
     </Provider>
   );
 }
-
-export default AppWithProvider;

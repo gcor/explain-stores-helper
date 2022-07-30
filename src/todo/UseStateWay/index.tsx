@@ -12,8 +12,8 @@ const initialState: Todos = [
   { value: "three" },
 ];
 
-function App() {
-  const [todos, setTodos] = useState<Todos>(initialState);
+export function UseStateWay({ defaultState = initialState }) {
+  const [todos, setTodos] = useState<Todos>(defaultState);
 
   function addTodo(value: string) {
     setTodos([...todos, { value: value }]);
@@ -43,5 +43,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

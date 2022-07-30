@@ -4,20 +4,20 @@ interface Todo {
   value: string;
 }
 
-type Todos = Todo[];
+export type Todos = Todo[];
 
-const defaultItems: Todos = [
+export const initialState: Todos = [
   { value: "one" },
   { value: "two" },
   { value: "three" },
 ];
 
-type AddTodo = { type: "ADD_TODO"; payload: Todo };
-type RemoveTodo = { type: "REMOVE_TODO"; payload: number };
+export type AddTodo = { type: "ADD_TODO"; payload: Todo };
+export type RemoveTodo = { type: "REMOVE_TODO"; payload: number };
 
 type Action = AddTodo | RemoveTodo;
 
-function todoReducer(todos: Todos, action: Action): Todos {
+export function todoReducer(todos: Todos, action: Action): Todos {
   switch (action.type) {
     case "ADD_TODO":
       return [...todos, action.payload];
@@ -28,8 +28,8 @@ function todoReducer(todos: Todos, action: Action): Todos {
   }
 }
 
-function App() {
-  const [todos, dispatch] = useReducer(todoReducer, defaultItems);
+export function UseReducerWay({ defaultState = initialState }) {
+  const [todos, dispatch] = useReducer(todoReducer, defaultState);
 
   function onKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
@@ -55,5 +55,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

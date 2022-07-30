@@ -6,7 +6,7 @@ interface Todo {
 
 type Todos = Todo[];
 
-const initialState: Todos = [
+export const initialState: Todos = [
   { value: "one" },
   { value: "two" },
   { value: "three" },
@@ -30,8 +30,8 @@ const useTodos = (defaultValue: Todos) => {
   };
 };
 
-function App() {
-  const { todos, addTodo, removeTodo } = useTodos(initialState);
+export function HooksWay({ defaultState = initialState }) {
+  const { todos, addTodo, removeTodo } = useTodos(defaultState);
 
   function onKeyUp(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
@@ -53,5 +53,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

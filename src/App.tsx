@@ -1,10 +1,10 @@
 import { useState } from "react";
-import HooksWay from "./todo/HooksWay";
-import ReduxWay from "./todo/ReduxWay";
-import UseReducerWay from "./todo/UseReducerWay";
-import UseStateWay from "./todo/UseStateWay";
+import { HooksWay } from "./todo/HooksWay";
+import { ReduxWay } from "./todo/ReduxWay";
+import { UseReducerWay } from "./todo/UseReducerWay";
+import { UseStateWay } from "./todo/UseStateWay";
 
-enum Way {
+export enum Way {
   REDUX_WAY = "REDUX_WAY",
   USE_REDUCER_WAY = "USE_REDUCER_WAY",
   USE_STATE_WAY = "USE_STATE_WAY",
@@ -24,27 +24,25 @@ function Type({ way }: { way: Way }) {
 
     case Way.REDUX_WAY:
       return <ReduxWay />;
-
-    default:
-      return null;
   }
 }
 
-function App() {
-  const [type, setType] = useState<Way>(Way.REDUX_WAY);
+function App({ defaultWay = Way.REDUX_WAY }) {
+  const [type, setType] = useState<Way>(defaultWay);
 
   return (
     <div>
       <select
+        data-testid="select-way"
         value={type}
         onChange={(e: React.KeyboardEvent<HTMLSelectElement>) =>
           setType(e.target.value as Way)
         }
       >
-        <option value={Way.USE_STATE_WAY}>useState</option>
-        <option value={Way.USE_REDUCER_WAY}>useReducer</option>
-        <option value={Way.HOOKS_WAY}>hooks</option>
-        <option value={Way.REDUX_WAY}>Redux</option>
+        <option value={Way.USE_STATE_WAY}>{Way.USE_STATE_WAY}</option>
+        <option value={Way.USE_REDUCER_WAY}>{Way.USE_REDUCER_WAY}</option>
+        <option value={Way.HOOKS_WAY}>{Way.HOOKS_WAY}</option>
+        <option value={Way.REDUX_WAY}>{Way.REDUX_WAY}</option>
       </select>
 
       <Type way={type} />
